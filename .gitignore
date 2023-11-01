@@ -163,5 +163,5 @@ cython_debug/
 # Data
 data/raw/*
 !data/raw/test/
-data/processed/
+data/processed/*
 
