@@ -8,7 +8,7 @@ To get started with this project, you need to have Python installed on your mach
 1. Clone the repository to your local machine using the command below:
 
 ```bash
-git clone https://github.com/your_username/DataScienceAce.git
+git clone https://github.com/CaoTouChan/DataScienceAce.git
 cd DataScienceAce
 ```
 
@@ -102,7 +102,7 @@ Alex Chan
 - Twitter/X [@caotouchan](https://twitter.com/caotouchan) 
 - caotouchan@gmail.com
 
-Project Link: https://github.com/your_username/DataScienceAce
+Project Link: https://github.com/CaoTouChan/DataScienceAce
 
 # Acknowledgments
 

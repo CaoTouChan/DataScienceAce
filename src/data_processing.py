@@ -1,6 +1,9 @@
+from abc import ABC, abstractmethod
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+
+from src.data_cleaning import *
 
 
 def load_data(file_path):
@@ -22,17 +25,25 @@ def load_data(file_path):
         return None
 
 
-def clean_data(data):
-    """
-    Perform cleaning operations on the raw data.
+def clean_data(data, config=None, custom_function=None):
+    cleaner = None
+    if custom_function:
+        cleaner = DataCleaner(CustomFunctionStrategy(custom_function))
+    elif config:
+        if config['strategy'] == 'missing_values':
+            cleaner = DataCleaner(MissingValuesStrategy(method=config.get('method', 'drop'), value=config.get('value')))
+        # ... more strategies based on config
+        elif config['strategy'] == 'outliers':
+            cleaner = DataCleaner(OutliersStrategy(method=config.get('method', 'remove'),
+                                                   threshold=config.get('threshold', 1.5),
+                                                   replace_with=config.get('replace_with')))
 
-    :param data: pandas DataFrame
-    :return: cleaned pandas DataFrame
-    """
-    # Dropping rows with missing values as an example
-    # TODO: Adjust cleaning steps based on your data and requirements
-    cleaned_data = data.dropna()
-    print("Data cleaned successfully.")
+    if cleaner:
+        cleaned_data = cleaner.clean_data(data)
+    else:
+        # Default cleaning (or raise an error if you prefer)
+        cleaned_data = data.dropna()
+
     return cleaned_data
 
 
