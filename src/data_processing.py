@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from src.data_cleaning import *
+from src.data_cleaning_strategies import *
 
 
 def load_data(file_path):

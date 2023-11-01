@@ -1,9 +1,10 @@
-# src/data_cleaning.py
+# src/data_cleaning_strategies.py
 
 from abc import ABC, abstractmethod
+
+import numpy as np
 import pandas as pd
 from scipy.stats import zscore
-import numpy as np
 
 
 class DataCleaningStrategy(ABC):
@@ -94,7 +95,7 @@ class CustomFunctionStrategy(DataCleaningStrategy):
 
     def clean(self, data: pd.DataFrame) -> pd.DataFrame:
         """
-        Clean the input DataFrame using a custom function.
+        Clean the input DataFrame using a custom function, such as dropping duplicates, correcting data type
 
         :param data: pandas DataFrame
         :return: cleaned pandas DataFrame
