@@ -26,6 +26,33 @@ def load_data(file_path):
 
 
 def clean_data(data, config=None, custom_function=None):
+    """
+    # TODO: Maybe change to multiple strategies instead of one ?
+    A unified function to clean data using various strategies. It can accept predefined strategies using
+    a config dictionary or a custom cleaning function.
+
+    :param data: pandas DataFrame - The input data that needs to be cleaned.
+    :param config: dict, optional - A configuration dictionary that specifies which cleaning strategy to use and its parameters.
+                   Example:
+                   {
+                       'strategy': 'missing_values',
+                       'method': 'fill',
+                       'value': 0
+                   }
+    :param custom_function: function, optional - A custom function that takes a DataFrame and returns a cleaned DataFrame.
+
+    :return: pandas DataFrame - The cleaned data.
+
+    Usage:
+
+    1. Using predefined strategies with config:
+    clean_data(data, config={'strategy': 'missing_values', 'method': 'fill', 'value': 0})
+
+    2. Using a custom cleaning function:
+    def my_cleaning_function(df):
+        return df.drop_duplicates()
+    clean_data(data, custom_function=my_cleaning_function)
+    """
     cleaner = None
     if custom_function:
         cleaner = DataCleaner(CustomFunctionStrategy(custom_function))
@@ -41,7 +68,7 @@ def clean_data(data, config=None, custom_function=None):
     if cleaner:
         cleaned_data = cleaner.clean_data(data)
     else:
-        # Default cleaning (or raise an error if you prefer)
+        # TODO Default cleaning strategy
         cleaned_data = data.dropna()
 
     return cleaned_data
