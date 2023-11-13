@@ -1,3 +1,7 @@
+import joblib
+import pandas as pd
+
+
 def save_model(model, file_path):
     """
     Save the trained model to a specified file path.
@@ -5,8 +9,7 @@ def save_model(model, file_path):
     :param model: trained machine learning model
     :param file_path: str, path to save the model
     """
-    # TODO: Implement model saving functionality
-    pass
+    joblib.dump(model, file_path)
 
 
 def load_model(file_path):
@@ -16,8 +19,20 @@ def load_model(file_path):
     :param file_path: str, path to the saved model
     :return: loaded model
     """
-    # TODO: Implement model loading functionality
-    pass
+    model = joblib.load(file_path)
+    return model
+
+
+def make_prediction(model, data):
+    """
+    Make predictions using a trained model.
+
+    :param model: trained machine learning model
+    :param data: array-like, input data for prediction
+    :return: array, model predictions
+    """
+    predictions = model.predict(data)
+    return predictions
 
 
 def save_results(results, file_path):
@@ -27,5 +42,5 @@ def save_results(results, file_path):
     :param results: results or performance metrics to save
     :param file_path: str, path to save the results
     """
-    # TODO: Implement results saving functionality
-    pass
+    results_df = pd.DataFrame(results, columns=['predictions'])
+    results_df.to_csv(file_path, index=False)
